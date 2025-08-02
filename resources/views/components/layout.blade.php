@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body class="h-full">
 
     <div class="min-h-full">
         <nav class="bg-gray-800">
@@ -19,13 +19,30 @@
                         <div class="shrink-0">
                             <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="size-8" />
                         </div>
+                        <!-- Navigation -->
                         <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-4">
-                                <a href="/" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-                                <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-                                <a href="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                            <div class="ml-10 flex items-center space-x-4">
+                                @php
+                                $navItems = [
+                                ['label' => 'Dashboard', 'href' => '/'],
+                                ['label' => 'Jobs', 'href' => '/jobs'],
+                                ['label' => 'Contact', 'href' => '/contact'],
+                                ];
+                                @endphp
+
+                                @foreach ($navItems as $item)
+                                <a
+                                    href="{{ $item['href'] }}"
+                                    class="px-4 py-2 rounded-xl transition-all duration-200 font-medium
+                    {{ request()->is(trim($item['href'], '/')) || request()->is('/') && $item['href'] == '/' 
+                        ? 'bg-blue-600 text-white shadow-md' 
+                        : 'text-gray-300 hover:text-white hover:bg-gray-700' }}">
+                                    {{ $item['label'] }}
+                                </a>
+                                @endforeach
                             </div>
                         </div>
+
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
@@ -72,7 +89,7 @@
             <el-disclosure id="mobile-menu" hidden class="block md:hidden">
                 <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                     <a href="/" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-                    <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+                    <a href="/jobs" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Jobs</a>
                     <a href="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
                 </div>
                 <div class="border-t border-gray-700 pt-4 pb-3">

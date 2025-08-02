@@ -2,8 +2,7 @@
     <x-slot:heading>
         Home page
     </x-slot:heading>
-    
-    <div>
-        <h1 class="text-red-500">Hello world</h1>
-    </div>
+
+    <h1> Home page </h1>
+
 </x-layout>
